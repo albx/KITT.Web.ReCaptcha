@@ -1,0 +1,72 @@
+﻿@page "/"
+@using System.ComponentModel.DataAnnotations
+@using KITT.Web.ReCaptcha.Blazor.v2
+
+@implements IDisposable
+
+<PageTitle>KITT ReCaptcha - Blazor sample</PageTitle>
+
+<h1>KITT ReCaptcha - Blazor sample</h1>
+
+<EditForm EditContext="context" role="form" OnValidSubmit="Submit">
+    <DataAnnotationsValidator />
+
+    <div class="mb-3">
+        <label>Text</label>
+        <InputTextArea @bind-Value="model.Text"
+                       class="form-control"
+                       tabindex="0"/>
+    </div>
+
+    <div class="mb-3">
+        <ReCaptcha SiteKey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                   @bind-Value="model.CaptchaResponse"
+                   Theme="Theme.Dark"
+                   Size="Size.Compact"
+                   TabIndex="1"/>
+    </div>
+
+    <div class="mb-3">
+        <button type="submit" disabled="@disabled" class="btn btn-primary">Click!</button>
+    </div>
+</EditForm>
+
+@code {
+    private ViewModel model = new();
+
+    private EditContext? context;
+
+    private bool disabled = true;
+
+    protected override void OnInitialized()
+    {
+        context = new EditContext(model);
+        context.OnFieldChanged += OnFieldChangedHandler;
+    }
+
+    private void OnFieldChangedHandler(object? sender, FieldChangedEventArgs e)
+    {
+        disabled = !(context!.Validate());
+        StateHasChanged();
+    }
+
+    private void Submit()
+    {
+        Console.WriteLine($"Text: {model.Text}");
+        Console.WriteLine($"Captcha: {model.CaptchaResponse}");
+    }
+
+    void IDisposable.Dispose()
+    {
+        context!.OnFieldChanged -= OnFieldChangedHandler;
+    }
+
+    class ViewModel
+    {
+        [Required]
+        public string Text { get; set; } = string.Empty;
+
+        [Required]
+        public string CaptchaResponse { get; set; } = string.Empty;
+    }
+}
