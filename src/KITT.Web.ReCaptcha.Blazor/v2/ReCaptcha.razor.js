@@ -5,10 +5,7 @@
         'theme': theme,
         'size': size,
         'callback': (response) => { dotNetObject.invokeMethodAsync('Success', response); },
-        'expired-callback': () => { dotNetObject.invokeMethodAsync('Expired'); }
+        'expired-callback': () => { dotNetObject.invokeMethodAsync('Expired'); },
+        'error-callback': () => { dotNetObject.invokeMethodAsync('Error'); }
     });
-}
-
-export function getResponse(response) {
-    return grecaptcha.getResponse(response);
 }

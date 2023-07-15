@@ -8,7 +8,7 @@ public partial class ReCaptcha : IAsyncDisposable
 {
     private IJSObjectReference? module;
 
-    private static readonly string elementId = "recaptcha";
+    private const string ElementId = "recaptcha";
 
     [Inject]
     public IJSRuntime Js { get; set; } = default!;
@@ -18,7 +18,7 @@ public partial class ReCaptcha : IAsyncDisposable
     public string SiteKey { get; set; } = string.Empty;
 
     [Parameter]
-    public string Id { get; set; } = elementId;
+    public string Id { get; set; } = ElementId;
 
     [Parameter]
     public int TabIndex { get; set; } = 0;
@@ -29,11 +29,17 @@ public partial class ReCaptcha : IAsyncDisposable
     [Parameter]
     public Size Size { get; set; } = Size.Normal;
 
+    [Parameter]
+    public EventCallback OnExpired { get; set; }
+
+    [Parameter]
+    public EventCallback OnError { get; set; }
+
     protected override void OnInitialized()
     {
         if (string.IsNullOrWhiteSpace(Id))
         {
-            Id = elementId;
+            Id = ElementId;
         }
     }
 
@@ -56,6 +62,7 @@ public partial class ReCaptcha : IAsyncDisposable
         }
     }
 
+    #region JSInvokable methods
     [JSInvokable]
     public void Success(string response)
     {
@@ -63,10 +70,19 @@ public partial class ReCaptcha : IAsyncDisposable
     }
 
     [JSInvokable]
-    public void Expired()
+    public async void Expired()
     {
         CurrentValue = string.Empty;
+        await OnExpired.InvokeAsync();
     }
+
+    [JSInvokable]
+    public async Task Error()
+    {
+        CurrentValue = string.Empty;
+        await OnError.InvokeAsync();
+    }
+    #endregion
 
     async ValueTask IAsyncDisposable.DisposeAsync()
     {

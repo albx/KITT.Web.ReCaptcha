@@ -4,6 +4,13 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Authors>Alberto Mori</Authors>
+    <PackageProjectUrl>https://github.com/albx/KITT.Web.ReCaptcha</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/albx/KITT.Web.ReCaptcha</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Title>KITT.Web.ReCaptcha.Blazor</Title>
+    <Description>Contains an implementation of Google reCaptcha both v2 and v3 for Blazor</Description>
   </PropertyGroup>
 
 
