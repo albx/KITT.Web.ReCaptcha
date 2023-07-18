@@ -70,7 +70,7 @@ public partial class ReCaptcha : IAsyncDisposable
     }
 
     [JSInvokable]
-    public async void Expired()
+    public async Task Expired()
     {
         CurrentValue = string.Empty;
         await OnExpired.InvokeAsync();

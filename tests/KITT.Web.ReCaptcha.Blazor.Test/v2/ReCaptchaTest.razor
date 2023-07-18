@@ -1,0 +1,55 @@
+﻿
+@code {
+    [Fact]
+    public void ReCaptcha_Should_Render_Div_With_Default_Id()
+    {
+        var siteKey = "testsitekey";
+        var captchaResponse = "";
+
+        using var ctx = new TestContext();
+        ctx.JSInterop.SetupModule("./_content/KITT.Web.ReCaptcha.Blazor/v2/ReCaptcha.razor.js")
+            .Setup<int>("initialize", _ => true);
+
+        var component = ctx.Render<ReCaptcha>(@<ReCaptcha SiteKey="@siteKey" @bind-Value="captchaResponse" />);
+
+        component.MarkupMatches(@<div id="recaptcha"></div>);
+    }
+
+    [Fact]
+    public void ReCaptcha_Should_Render_Div_With_Specified_Id()
+    {
+        var siteKey = "testsitekey";
+        var captchaResponse = "";
+
+        using var ctx = new TestContext();
+        ctx.JSInterop.SetupModule("./_content/KITT.Web.ReCaptcha.Blazor/v2/ReCaptcha.razor.js")
+            .Setup<int>("initialize", _ => true);
+
+        var component = ctx.Render<ReCaptcha>(
+            @<ReCaptcha SiteKey="@siteKey" @bind-Value="captchaResponse" Id="testId" />);
+
+        component.MarkupMatches(@<div id="testId"></div>);
+    }
+
+    [Fact]
+    public void ReCaptcha_Should_Call_Initialize_Javascript_Method_With_Default_Values()
+    {
+        var siteKey = "testsitekey";
+        var captchaResponse = "";
+
+        using var ctx = new TestContext();
+        var module = ctx.JSInterop.SetupModule("./_content/KITT.Web.ReCaptcha.Blazor/v2/ReCaptcha.razor.js");
+        module.Setup<int>(
+            "initialize", 
+            i => i.Arguments[1]!.ToString() == "recaptcha" &&
+                i.Arguments[2]!.ToString() == siteKey &&
+                i.Arguments[3]!.ToString() == "0" &&
+                i.Arguments[4]!.ToString() == "light" &&
+                i.Arguments[5]!.ToString() == "normal");
+
+        var component = ctx.Render<ReCaptcha>(
+            @<ReCaptcha SiteKey="@siteKey" @bind-Value="captchaResponse" />);
+
+        module.VerifyInvoke("initialize", 1);
+    }
+}

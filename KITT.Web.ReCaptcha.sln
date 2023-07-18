@@ -11,6 +11,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{39770B25-654
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KITT.Web.ReCaptcha.Blazor", "src\KITT.Web.ReCaptcha.Blazor\KITT.Web.ReCaptcha.Blazor.csproj", "{0A4FEE9D-D231-4206-AF20-6CE27837FF86}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KITT.Web.ReCaptcha.Http", "src\KITT.Web.ReCaptcha.Http\KITT.Web.ReCaptcha.Http.csproj", "{5056DCCA-021C-45CC-AB85-D554BE7A418C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{666921F2-3F1C-41CB-B20C-AD80DC19C147}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KITT.Web.ReCaptcha.Blazor.Test", "tests\KITT.Web.ReCaptcha.Blazor.Test\KITT.Web.ReCaptcha.Blazor.Test.csproj", "{E9C2AD1C-C45F-4076-855F-E4A8BBB69685}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +31,14 @@ Global
 		{0A4FEE9D-D231-4206-AF20-6CE27837FF86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A4FEE9D-D231-4206-AF20-6CE27837FF86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A4FEE9D-D231-4206-AF20-6CE27837FF86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5056DCCA-021C-45CC-AB85-D554BE7A418C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5056DCCA-021C-45CC-AB85-D554BE7A418C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5056DCCA-021C-45CC-AB85-D554BE7A418C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5056DCCA-021C-45CC-AB85-D554BE7A418C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9C2AD1C-C45F-4076-855F-E4A8BBB69685}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9C2AD1C-C45F-4076-855F-E4A8BBB69685}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9C2AD1C-C45F-4076-855F-E4A8BBB69685}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9C2AD1C-C45F-4076-855F-E4A8BBB69685}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,5 +46,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{E99A5AAB-974A-4777-BC43-B95A00577ADF} = {9F2FE018-66B6-420A-AB1F-F482EA4569B7}
 		{0A4FEE9D-D231-4206-AF20-6CE27837FF86} = {39770B25-6549-41C3-B2A6-8D652F2B4DAD}
+		{5056DCCA-021C-45CC-AB85-D554BE7A418C} = {39770B25-6549-41C3-B2A6-8D652F2B4DAD}
+		{E9C2AD1C-C45F-4076-855F-E4A8BBB69685} = {666921F2-3F1C-41CB-B20C-AD80DC19C147}
 	EndGlobalSection
 EndGlobal
