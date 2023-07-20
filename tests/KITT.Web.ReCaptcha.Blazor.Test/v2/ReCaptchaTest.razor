@@ -10,7 +10,7 @@
         ctx.JSInterop.SetupModule("./_content/KITT.Web.ReCaptcha.Blazor/v2/ReCaptcha.razor.js")
             .Setup<int>("initialize", _ => true);
 
-        var component = ctx.Render<ReCaptcha>(@<ReCaptcha SiteKey="@siteKey" @bind-Value="captchaResponse" />);
+        var component = ctx.Render(@<ReCaptcha SiteKey="@siteKey" @bind-Value="captchaResponse" />);
 
         component.MarkupMatches(@<div id="recaptcha"></div>);
     }
@@ -25,7 +25,7 @@
         ctx.JSInterop.SetupModule("./_content/KITT.Web.ReCaptcha.Blazor/v2/ReCaptcha.razor.js")
             .Setup<int>("initialize", _ => true);
 
-        var component = ctx.Render<ReCaptcha>(
+        var component = ctx.Render(
             @<ReCaptcha SiteKey="@siteKey" @bind-Value="captchaResponse" Id="testId" />);
 
         component.MarkupMatches(@<div id="testId"></div>);
@@ -47,8 +47,78 @@
                 i.Arguments[4]!.ToString() == "light" &&
                 i.Arguments[5]!.ToString() == "normal");
 
-        var component = ctx.Render<ReCaptcha>(
+        var component = ctx.Render(
             @<ReCaptcha SiteKey="@siteKey" @bind-Value="captchaResponse" />);
+
+        module.VerifyInvoke("initialize", 1);
+    }
+
+    [Theory]
+    [InlineData(Theme.Light, "light")]
+    [InlineData(Theme.Dark, "dark")]
+    public void ReCaptcha_Should_Call_Initialize_Javascript_Method_With_Specified_Theme_Value(Theme theme, string themeValue)
+    {
+        var siteKey = "testsitekey";
+        var captchaResponse = "";
+
+        using var ctx = new TestContext();
+        var module = ctx.JSInterop.SetupModule("./_content/KITT.Web.ReCaptcha.Blazor/v2/ReCaptcha.razor.js");
+        module.Setup<int>(
+            "initialize", 
+            i => i.Arguments[1]!.ToString() == "recaptcha" &&
+                i.Arguments[2]!.ToString() == siteKey &&
+                i.Arguments[3]!.ToString() == "0" &&
+                i.Arguments[4]!.ToString() == themeValue &&
+                i.Arguments[5]!.ToString() == "normal");
+
+        var component = ctx.Render(
+            @<ReCaptcha SiteKey="@siteKey" @bind-Value="captchaResponse" Theme="theme" />);
+
+        module.VerifyInvoke("initialize", 1);
+    }
+
+    [Theory]
+    [InlineData(Size.Normal, "normal")]
+    [InlineData(Size.Compact, "compact")]
+    public void ReCaptcha_Should_Call_Initialize_Javascript_Method_With_Specified_Size_Value(Size size, string sizeValue)
+    {
+        var siteKey = "testsitekey";
+        var captchaResponse = "";
+
+        using var ctx = new TestContext();
+        var module = ctx.JSInterop.SetupModule("./_content/KITT.Web.ReCaptcha.Blazor/v2/ReCaptcha.razor.js");
+        module.Setup<int>(
+            "initialize", 
+            i => i.Arguments[1]!.ToString() == "recaptcha" &&
+                i.Arguments[2]!.ToString() == siteKey &&
+                i.Arguments[3]!.ToString() == "0" &&
+                i.Arguments[4]!.ToString() == "light" &&
+                i.Arguments[5]!.ToString() == sizeValue);
+
+        var component = ctx.Render(
+            @<ReCaptcha SiteKey="@siteKey" @bind-Value="captchaResponse" Size="size" />);
+
+        module.VerifyInvoke("initialize", 1);
+    }
+
+    [Fact]
+    public void ReCaptcha_Should_Call_Initialize_Javascript_Method_With_Specified_TabIndex_Value()
+    {
+        var siteKey = "testsitekey";
+        var captchaResponse = "";
+
+        using var ctx = new TestContext();
+        var module = ctx.JSInterop.SetupModule("./_content/KITT.Web.ReCaptcha.Blazor/v2/ReCaptcha.razor.js");
+        module.Setup<int>(
+            "initialize",
+            i => i.Arguments[1]!.ToString() == "recaptcha" &&
+                i.Arguments[2]!.ToString() == siteKey &&
+                i.Arguments[3]!.ToString() == "1" &&
+                i.Arguments[4]!.ToString() == "light" &&
+                i.Arguments[5]!.ToString() == "normal");
+
+        var component = ctx.Render(
+            @<ReCaptcha SiteKey="@siteKey" @bind-Value="captchaResponse" TabIndex="1" />);
 
         module.VerifyInvoke("initialize", 1);
     }
