@@ -17,6 +17,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{666921F2
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KITT.Web.ReCaptcha.Blazor.Test", "tests\KITT.Web.ReCaptcha.Blazor.Test\KITT.Web.ReCaptcha.Blazor.Test.csproj", "{E9C2AD1C-C45F-4076-855F-E4A8BBB69685}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KITT.Web.ReCaptcha.Samples.Http", "samples\KITT.Web.ReCaptcha.Samples.Http\KITT.Web.ReCaptcha.Samples.Http.csproj", "{7FDE1DE5-7207-4B64-80A2-BFF2395C8D99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KITT.Web.ReCaptcha.Http.Test", "tests\KITT.Web.ReCaptcha.Http.Test\KITT.Web.ReCaptcha.Http.Test.csproj", "{3D97264E-43DD-47DF-8549-8DA4FB764A16}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{E9C2AD1C-C45F-4076-855F-E4A8BBB69685}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9C2AD1C-C45F-4076-855F-E4A8BBB69685}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9C2AD1C-C45F-4076-855F-E4A8BBB69685}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FDE1DE5-7207-4B64-80A2-BFF2395C8D99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FDE1DE5-7207-4B64-80A2-BFF2395C8D99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FDE1DE5-7207-4B64-80A2-BFF2395C8D99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FDE1DE5-7207-4B64-80A2-BFF2395C8D99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D97264E-43DD-47DF-8549-8DA4FB764A16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D97264E-43DD-47DF-8549-8DA4FB764A16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D97264E-43DD-47DF-8549-8DA4FB764A16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D97264E-43DD-47DF-8549-8DA4FB764A16}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,5 +60,10 @@ Global
 		{0A4FEE9D-D231-4206-AF20-6CE27837FF86} = {39770B25-6549-41C3-B2A6-8D652F2B4DAD}
 		{5056DCCA-021C-45CC-AB85-D554BE7A418C} = {39770B25-6549-41C3-B2A6-8D652F2B4DAD}
 		{E9C2AD1C-C45F-4076-855F-E4A8BBB69685} = {666921F2-3F1C-41CB-B20C-AD80DC19C147}
+		{7FDE1DE5-7207-4B64-80A2-BFF2395C8D99} = {9F2FE018-66B6-420A-AB1F-F482EA4569B7}
+		{3D97264E-43DD-47DF-8549-8DA4FB764A16} = {666921F2-3F1C-41CB-B20C-AD80DC19C147}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E11BFBD2-D7CD-4847-9A63-9F878DC4AFD7}
 	EndGlobalSection
 EndGlobal

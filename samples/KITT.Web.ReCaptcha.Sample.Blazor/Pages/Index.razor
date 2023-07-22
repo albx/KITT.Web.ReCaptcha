@@ -4,9 +4,22 @@
 
 @implements IDisposable
 
+@inject HttpClient HttpClient
+
 <PageTitle>KITT ReCaptcha - Blazor sample</PageTitle>
 
 <h1>KITT ReCaptcha - Blazor sample</h1>
+
+@if (!string.IsNullOrWhiteSpace(message))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert @(isSuccessMessage ? "alert-success" : "alert-danger")" role="alert">
+                @message
+            </div>
+        </div>
+    </div>
+}
 
 <EditForm EditContext="context" role="form" OnValidSubmit="Submit">
     <DataAnnotationsValidator />
@@ -15,7 +28,7 @@
         <label>Text</label>
         <InputTextArea @bind-Value="model.Text"
                        class="form-control"
-                       tabindex="0"/>
+                       tabindex="0" />
     </div>
 
     <div class="mb-3">
@@ -23,7 +36,7 @@
                    @bind-Value="model.CaptchaResponse"
                    Theme="Theme.Dark"
                    Size="Size.Normal"
-                   TabIndex="1"/>
+                   TabIndex="1" />
     </div>
 
     <div class="mb-3">
@@ -38,6 +51,10 @@
 
     private bool disabled = true;
 
+    private string? message;
+
+    private bool isSuccessMessage;
+
     protected override void OnInitialized()
     {
         context = new EditContext(model);
@@ -50,10 +67,25 @@
         StateHasChanged();
     }
 
-    private void Submit()
+    private async Task Submit()
     {
         Console.WriteLine($"Text: {model.Text}");
         Console.WriteLine($"Captcha: {model.CaptchaResponse}");
+
+        var response = await HttpClient.PostAsJsonAsync(
+            "send",
+            model);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            message = "There was an error sending the request";
+            isSuccessMessage = false;
+        }
+        else
+        {
+            message = "All was OK!";
+            isSuccessMessage = true;
+        }
     }
 
     void IDisposable.Dispose()
