@@ -17,9 +17,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{666921F2
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KITT.Web.ReCaptcha.Blazor.Test", "tests\KITT.Web.ReCaptcha.Blazor.Test\KITT.Web.ReCaptcha.Blazor.Test.csproj", "{E9C2AD1C-C45F-4076-855F-E4A8BBB69685}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KITT.Web.ReCaptcha.Samples.Http", "samples\KITT.Web.ReCaptcha.Samples.Http\KITT.Web.ReCaptcha.Samples.Http.csproj", "{7FDE1DE5-7207-4B64-80A2-BFF2395C8D99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KITT.Web.ReCaptcha.Samples.Http", "samples\KITT.Web.ReCaptcha.Samples.Http\KITT.Web.ReCaptcha.Samples.Http.csproj", "{7FDE1DE5-7207-4B64-80A2-BFF2395C8D99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KITT.Web.ReCaptcha.Http.Test", "tests\KITT.Web.ReCaptcha.Http.Test\KITT.Web.ReCaptcha.Http.Test.csproj", "{3D97264E-43DD-47DF-8549-8DA4FB764A16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KITT.Web.ReCaptcha.Http.Test", "tests\KITT.Web.ReCaptcha.Http.Test\KITT.Web.ReCaptcha.Http.Test.csproj", "{3D97264E-43DD-47DF-8549-8DA4FB764A16}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{77B59A0C-38A4-4011-B63A-6D581C9476B9}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KITT.Web.ReCaptcha.Sample.BlazorServer", "samples\KITT.Web.ReCaptcha.Sample.BlazorServer\KITT.Web.ReCaptcha.Sample.BlazorServer.csproj", "{A795A865-0427-4256-AFC2-B2AC69D7AF3D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +58,10 @@ Global
 		{3D97264E-43DD-47DF-8549-8DA4FB764A16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D97264E-43DD-47DF-8549-8DA4FB764A16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D97264E-43DD-47DF-8549-8DA4FB764A16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A795A865-0427-4256-AFC2-B2AC69D7AF3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A795A865-0427-4256-AFC2-B2AC69D7AF3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A795A865-0427-4256-AFC2-B2AC69D7AF3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A795A865-0427-4256-AFC2-B2AC69D7AF3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +73,7 @@ Global
 		{E9C2AD1C-C45F-4076-855F-E4A8BBB69685} = {666921F2-3F1C-41CB-B20C-AD80DC19C147}
 		{7FDE1DE5-7207-4B64-80A2-BFF2395C8D99} = {9F2FE018-66B6-420A-AB1F-F482EA4569B7}
 		{3D97264E-43DD-47DF-8549-8DA4FB764A16} = {666921F2-3F1C-41CB-B20C-AD80DC19C147}
+		{A795A865-0427-4256-AFC2-B2AC69D7AF3D} = {9F2FE018-66B6-420A-AB1F-F482EA4569B7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E11BFBD2-D7CD-4847-9A63-9F878DC4AFD7}
