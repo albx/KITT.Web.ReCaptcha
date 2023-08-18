@@ -1,6 +1,5 @@
 ﻿using KITT.Web.ReCaptcha.Http.Configuration;
 using Microsoft.Extensions.Options;
-using System.Net.Http;
 using System.Net.Http.Json;
 
 namespace KITT.Web.ReCaptcha.Http.v2;
@@ -14,7 +13,9 @@ public class ReCaptchaService
     public ReCaptchaService(HttpClient httpClient, IOptions<ReCaptchaConfiguration> reCaptchaConfigurationOptions)
     {
         _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
-        _configuration = reCaptchaConfigurationOptions?.Value ?? throw new ArgumentNullException();
+        _configuration = reCaptchaConfigurationOptions?.Value ?? throw new ArgumentNullException(nameof(reCaptchaConfigurationOptions));
+
+        ThrowIfConfigurationIsNotValid(_configuration);
     }
 
     public async Task<ReCaptchaResponse> VerifyAsync(string response, string? remoteIp = null, CancellationToken cancellationToken = default)
@@ -39,4 +40,14 @@ public class ReCaptchaService
 
         return responseResult!;
     }
+
+    #region Private methods
+    private static void ThrowIfConfigurationIsNotValid(ReCaptchaConfiguration configuration)
+    {
+        if (string.IsNullOrWhiteSpace(configuration.SecretKey))
+        {
+            throw new ArgumentException("value cannot be empty", nameof(configuration.SecretKey));
+        }
+    }
+    #endregion
 }
