@@ -13,7 +13,7 @@ builder.Services.AddCors(
 
 builder.Services.AddReCaptchaV2(options =>
 {
-    options.SecretKey = "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe";
+    options.SecretKey = "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"; // this is the v2 test secret
 });
 
 var app = builder.Build();
@@ -27,8 +27,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseCors();
-
-//test secret: 6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe
 
 var summaries = new[]
 {
@@ -55,7 +53,7 @@ app.MapPost("/send", async (ReCaptchaService reCaptchaService, [FromBody] SendRe
     var captchaResponse = await reCaptchaService.VerifyAsync(request.CaptchaResponse);
     if (!captchaResponse.Success)
     {
-        return Results.BadRequest();
+        return Results.BadRequest(captchaResponse.ErrorCodes);
     }
 
     return Results.Ok();

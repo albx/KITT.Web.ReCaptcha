@@ -1,7 +1,4 @@
 using KITT.Web.ReCaptcha.Http.v2;
-using KITT.Web.ReCaptcha.Sample.BlazorServer.Data;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 

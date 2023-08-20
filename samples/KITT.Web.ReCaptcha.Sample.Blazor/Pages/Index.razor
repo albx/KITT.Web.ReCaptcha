@@ -6,16 +6,25 @@
 
 @inject HttpClient HttpClient
 
-<PageTitle>KITT ReCaptcha - Blazor sample</PageTitle>
+<PageTitle>KITT ReCaptcha - Blazor WASM sample</PageTitle>
 
-<h1>KITT ReCaptcha - Blazor sample</h1>
+<h1>KITT ReCaptcha - Blazor WASM sample</h1>
 
 @if (!string.IsNullOrWhiteSpace(message))
 {
     <div class="row">
         <div class="col-md-12">
             <div class="alert @(isSuccessMessage ? "alert-success" : "alert-danger")" role="alert">
-                @message
+                <p>@message</p>
+                @if (errorCodes.Any())
+                {
+                    <ul class="list-unstyled">
+                        @foreach (var errorCode in errorCodes)
+                        {
+                            <li>@errorCode</li>
+                        }
+                    </ul>
+                }
             </div>
         </div>
     </div>
@@ -55,6 +64,8 @@
 
     private bool isSuccessMessage;
 
+    private IEnumerable<string> errorCodes = Enumerable.Empty<string>();
+
     protected override void OnInitialized()
     {
         context = new EditContext(model);
@@ -80,12 +91,16 @@
         {
             message = "There was an error sending the request";
             isSuccessMessage = false;
+            errorCodes = await response.Content.ReadFromJsonAsync<IEnumerable<string>>() ?? Enumerable.Empty<string>();
         }
         else
         {
             message = "All was OK!";
             isSuccessMessage = true;
+            errorCodes = Enumerable.Empty<string>();
         }
+
+        model = new();
     }
 
     void IDisposable.Dispose()
