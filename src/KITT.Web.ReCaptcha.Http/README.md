@@ -44,7 +44,7 @@ app.MapPost("/send", async (ReCaptchaService reCaptchaService, [FromBody] SendRe
 
 ## Methods
 
-The ```VerifyAsync``` has the following input parameters:
+The ```VerifyAsync``` method has the following input parameters:
 
 |Property|Description|
 |---|---|
@@ -52,7 +52,7 @@ The ```VerifyAsync``` has the following input parameters:
 |**remoteIp** (Optional)|*string*: The user's IP address. (Default: *null*)|
 |**cancellationToken** (Optional)|*CancellationToken*: a cancellation token instance (Default: *CancellationToken.None*)|
 
-The response of the method is mapped by the ```ReCaptchaResponse``` class:
+The method returns an instance of the ```ReCaptchaResponse``` class, which have the following properties:
 
 |Property|Description|
 |---|---|
