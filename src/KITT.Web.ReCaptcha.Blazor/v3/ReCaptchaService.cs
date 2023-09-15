@@ -2,17 +2,33 @@
 
 namespace KITT.Web.ReCaptcha.Blazor.v3;
 
+/// <summary>
+/// This service performs the client-side validation for Google reCaptcha v3
+/// </summary>
 public class ReCaptchaService : IAsyncDisposable
 {
     private readonly IJSRuntime _jSRuntime;
 
     private IJSObjectReference? _module;
 
+    /// <summary>
+    /// Constructs the service instance
+    /// </summary>
+    /// <param name="jSRuntime">The <see cref="IJSRuntime"/> instance</param>
+    /// <exception cref="ArgumentNullException">Thrown if the <see cref="IJSRuntime"/> is null</exception>
     public ReCaptchaService(IJSRuntime jSRuntime)
     {
         _jSRuntime = jSRuntime ?? throw new ArgumentNullException(nameof(jSRuntime));
     }
 
+    /// <summary>
+    /// Verifies the reCaptcha v3
+    /// </summary>
+    /// <param name="siteKey">The reCaptcha client-side v3 site key</param>
+    /// <param name="action">The action to specify in the reCaptcha</param>
+    /// <returns>A <see cref="ReCaptchaResult"/> instance</returns>
+    /// <exception cref="ArgumentException">Site key or action are empty</exception>
+    /// <exception cref="InvalidOperationException">When the reCaptcha module is not loaded correctly</exception>
     public async Task<ReCaptchaResult> VerifyAsync(string siteKey, string action)
     {
         if (string.IsNullOrWhiteSpace(siteKey))
