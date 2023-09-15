@@ -1,0 +1,36 @@
+name: Build and run Test
+
+on:
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+env:
+  NET_VERSION: '7.x'
+  PROJECT_NAME: src/KITT.Web.ReCaptcha.Http
+  PROJECT_FILE: KITT.Web.ReCaptcha.Http.csproj
+  RELEASE_NAME: KITT.Web.ReCaptcha.Http
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with: 
+        fetch-depth: 0
+        
+    - name: Setup .NET Core SDK ${{ env.NET_VERSION }}
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: ${{ env.NET_VERSION }}
+        
+    - name: Restore dependencies
+      run: dotnet restore
+      
+    - name: Build
+      run: dotnet build '${{ env.PROJECT_NAME }}/${{ env.PROJECT_FILE }}' --configuration Release --no-restore
+      
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+                    
