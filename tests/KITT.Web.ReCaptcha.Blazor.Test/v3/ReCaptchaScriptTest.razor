@@ -1,0 +1,13 @@
+﻿@inherits TestContext
+
+@code {
+    [Fact]
+    public void ReCaptchaScript_Should_Render_ReCaptcha_Script_With_SiteKey_Correctly()
+    {
+        Services.Configure<ReCaptchaConfiguration>(option => option.SiteKey = "testsitekey");
+
+        var component = Render(@<ReCaptchaScript />);
+
+        component.MarkupMatches(@<script src="https://www.google.com/recaptcha/api.js?render=testsitekey"></script>);
+    }
+}
