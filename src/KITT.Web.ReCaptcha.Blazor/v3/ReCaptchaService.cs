@@ -1,4 +1,5 @@
-﻿using Microsoft.JSInterop;
+﻿using Microsoft.Extensions.Options;
+using Microsoft.JSInterop;
 
 namespace KITT.Web.ReCaptcha.Blazor.v3;
 
@@ -9,33 +10,33 @@ public class ReCaptchaService : IAsyncDisposable
 {
     private readonly IJSRuntime _jSRuntime;
 
+    private readonly ReCaptchaConfiguration _configuration;
+
     private IJSObjectReference? _module;
 
     /// <summary>
     /// Constructs the service instance
     /// </summary>
     /// <param name="jSRuntime">The <see cref="IJSRuntime"/> instance</param>
+    /// <param name="reCaptchaConfigurationOptions">The <see cref="ReCaptchaConfiguration"/> options instance</param>
     /// <exception cref="ArgumentNullException">Thrown if the <see cref="IJSRuntime"/> is null</exception>
-    public ReCaptchaService(IJSRuntime jSRuntime)
+    public ReCaptchaService(IJSRuntime jSRuntime, IOptions<ReCaptchaConfiguration> reCaptchaConfigurationOptions)
     {
         _jSRuntime = jSRuntime ?? throw new ArgumentNullException(nameof(jSRuntime));
+        _configuration = reCaptchaConfigurationOptions?.Value ?? throw new ArgumentNullException(nameof(reCaptchaConfigurationOptions));
+
+        ThrowIfConfigurationIsNotValid(_configuration);
     }
 
     /// <summary>
     /// Verifies the reCaptcha v3
     /// </summary>
-    /// <param name="siteKey">The reCaptcha client-side v3 site key</param>
     /// <param name="action">The action to specify in the reCaptcha</param>
     /// <returns>A <see cref="ReCaptchaResult"/> instance</returns>
     /// <exception cref="ArgumentException">Site key or action are empty</exception>
     /// <exception cref="InvalidOperationException">When the reCaptcha module is not loaded correctly</exception>
-    public async Task<ReCaptchaResult> VerifyAsync(string siteKey, string action)
+    public async Task<ReCaptchaResult> VerifyAsync(string action)
     {
-        if (string.IsNullOrWhiteSpace(siteKey))
-        {
-            throw new ArgumentException("value cannot be empty", nameof(siteKey));
-        }
-
         if (string.IsNullOrWhiteSpace(action))
         {
             throw new ArgumentException("value cannot be empty", nameof(action));
@@ -49,7 +50,7 @@ public class ReCaptchaService : IAsyncDisposable
                 throw new InvalidOperationException("reCaptcha not loaded");
             }
 
-            var response = await _module.InvokeAsync<string>("execute", siteKey, action);
+            var response = await _module.InvokeAsync<string>("execute", _configuration.SiteKey, action);
             return ReCaptchaResult.Success(response);
         }
         catch (JSException ex)
@@ -74,6 +75,16 @@ public class ReCaptchaService : IAsyncDisposable
         if (_module is not null)
         {
             await _module.DisposeAsync();
+        }
+    }
+    #endregion
+
+    #region Private validation helper
+    private static void ThrowIfConfigurationIsNotValid(ReCaptchaConfiguration configuration)
+    {
+        if (string.IsNullOrWhiteSpace(configuration.SiteKey))
+        {
+            throw new ArgumentException("value cannot be empty", nameof(configuration.SiteKey));
         }
     }
     #endregion

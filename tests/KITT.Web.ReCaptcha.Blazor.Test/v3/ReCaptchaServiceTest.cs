@@ -1,5 +1,6 @@
 ﻿using Bunit;
 using KITT.Web.ReCaptcha.Blazor.v3;
+using Microsoft.Extensions.Options;
 using Microsoft.JSInterop;
 
 namespace KITT.Web.ReCaptcha.Blazor.Test.v3;
@@ -9,12 +10,12 @@ public class ReCaptchaServiceTest : TestContext
     [Theory]
     [InlineData("")]
     [InlineData(" ")]
-    public async Task VerifyAsync_Should_Throw_ArgumentException_If_SiteKey_Is_Empty(string siteKey)
+    public void Ctor_Should_Throw_ArgumentException_If_Site_Key_Is_Empty(string siteKey)
     {
-        var service = new ReCaptchaService(JSInterop.JSRuntime);
+        var reCaptchaConfigurationOptions = Options.Create(new ReCaptchaConfiguration { SiteKey = siteKey });
 
-        var ex = await Assert.ThrowsAsync<ArgumentException>(() => service.VerifyAsync(siteKey, action: "test"));
-        Assert.Equal(nameof(siteKey), ex.ParamName);
+        var ex = Assert.Throws<ArgumentException>(() => new ReCaptchaService(JSInterop.JSRuntime, reCaptchaConfigurationOptions));
+        Assert.Equal(nameof(ReCaptchaConfiguration.SiteKey), ex.ParamName);
     }
 
     [Theory]
@@ -22,9 +23,10 @@ public class ReCaptchaServiceTest : TestContext
     [InlineData(" ")]
     public async Task VerifyAsync_Should_Throw_ArgumentException_If_Action_Is_Empty(string action)
     {
-        var service = new ReCaptchaService(JSInterop.JSRuntime);
+        var reCaptchaConfigurationOptions = Options.Create(new ReCaptchaConfiguration { SiteKey = "testsitekey" });
+        var service = new ReCaptchaService(JSInterop.JSRuntime, reCaptchaConfigurationOptions);
 
-        var ex = await Assert.ThrowsAsync<ArgumentException>(() => service.VerifyAsync(siteKey: "testsitekey", action));
+        var ex = await Assert.ThrowsAsync<ArgumentException>(() => service.VerifyAsync(action));
         Assert.Equal(nameof(action), ex.ParamName);
     }
 
@@ -40,8 +42,10 @@ public class ReCaptchaServiceTest : TestContext
         var module = JSInterop.SetupModule("./_content/KITT.Web.ReCaptcha.Blazor/v3/recaptcha-v3.js");
         module.Setup<string>("execute", siteKey, action).SetException(new JSException(errorMessage));
 
-        var service = new ReCaptchaService(JSInterop.JSRuntime);
-        var result = await service.VerifyAsync(siteKey, action);
+        var reCaptchaConfigurationOptions = Options.Create(new ReCaptchaConfiguration { SiteKey = siteKey });
+
+        var service = new ReCaptchaService(JSInterop.JSRuntime, reCaptchaConfigurationOptions);
+        var result = await service.VerifyAsync(action);
 
         Assert.Equal(expectedResult, result);
     }
@@ -58,8 +62,10 @@ public class ReCaptchaServiceTest : TestContext
         var module = JSInterop.SetupModule("./_content/KITT.Web.ReCaptcha.Blazor/v3/recaptcha-v3.js");
         module.Setup<string>("execute", siteKey, action).SetResult(expectedResponse);
 
-        var service = new ReCaptchaService(JSInterop.JSRuntime);
-        var result = await service.VerifyAsync(siteKey, action);
+        var reCaptchaConfigurationOptions = Options.Create(new ReCaptchaConfiguration { SiteKey = siteKey });
+
+        var service = new ReCaptchaService(JSInterop.JSRuntime, reCaptchaConfigurationOptions);
+        var result = await service.VerifyAsync(action);
 
         Assert.Equal(expectedResult, result);
     }
