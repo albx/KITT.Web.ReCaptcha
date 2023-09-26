@@ -3,7 +3,10 @@ name: Build and run Test
 on:
   pull_request:
     branches: [ "main" ]
-    paths: ['**.cs', '**.razor', '**.csproj']
+    paths: 
+    - '**.cs'
+    - '**.razor'
+    - '**.csproj'
   workflow_dispatch:
 
 env:
