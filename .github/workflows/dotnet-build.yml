@@ -3,13 +3,11 @@ name: Build and run Test
 on:
   pull_request:
     branches: [ "main" ]
+    paths: ['**.cs', '**.razor', '**.csproj']
   workflow_dispatch:
 
 env:
   NET_VERSION: '7.x'
-  PROJECT_NAME: src/KITT.Web.ReCaptcha.Http
-  PROJECT_FILE: KITT.Web.ReCaptcha.Http.csproj
-  RELEASE_NAME: KITT.Web.ReCaptcha.Http
 
 jobs:
   build:
@@ -29,7 +27,7 @@ jobs:
       run: dotnet restore
       
     - name: Build
-      run: dotnet build '${{ env.PROJECT_NAME }}/${{ env.PROJECT_FILE }}' --configuration Release --no-restore
+      run: dotnet build --configuration Release --no-restore
       
     - name: Test
       run: dotnet test --no-build --verbosity normal
