@@ -61,12 +61,9 @@ public class ReCaptchaService : IAsyncDisposable
 
     private async Task LoadReCaptchaModuleAsync()
     {
-        if (_module is null)
-        {
-            _module = await _jSRuntime.InvokeAsync<IJSObjectReference>(
-                "import",
-                "./_content/KITT.Web.ReCaptcha.Blazor/v3/recaptcha-v3.js");
-        }
+        _module ??= await _jSRuntime.InvokeAsync<IJSObjectReference>(
+            "import",
+            "./_content/KITT.Web.ReCaptcha.Blazor/v3/recaptcha-v3.js");
     }
 
     #region AsyncDisposable

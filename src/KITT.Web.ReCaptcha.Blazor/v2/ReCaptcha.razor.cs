@@ -62,6 +62,7 @@ public partial class ReCaptcha : IAsyncDisposable
     [Parameter]
     public EventCallback OnError { get; set; }
 
+    /// <inheritdoc/>
     protected override void OnInitialized()
     {
         if (string.IsNullOrWhiteSpace(Id))
@@ -70,6 +71,7 @@ public partial class ReCaptcha : IAsyncDisposable
         }
     }
 
+    /// <inheritdoc/>
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
@@ -123,7 +125,7 @@ public partial class ReCaptcha : IAsyncDisposable
     }
     #endregion
 
-    /// <see cref="IAsyncDisposable.DisposeAsync"/>
+    /// <inheritdoc/>
     async ValueTask IAsyncDisposable.DisposeAsync()
     {
         if (module is not null)
@@ -132,6 +134,7 @@ public partial class ReCaptcha : IAsyncDisposable
         }
     }
 
+    /// <inheritdoc/>
     protected override bool TryParseValueFromString(string? value, [MaybeNullWhen(false)] out string result, [NotNullWhen(false)] out string? validationErrorMessage)
     {
         validationErrorMessage = string.Empty;
