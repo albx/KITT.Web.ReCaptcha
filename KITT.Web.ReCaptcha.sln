@@ -30,6 +30,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "v3", "v3", "{4475A800-676E-
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KITT.Web.ReCaptcha.Sample.v2.BlazorServer", "samples\v2\KITT.Web.ReCaptcha.Sample.v2.BlazorServer\KITT.Web.ReCaptcha.Sample.v2.BlazorServer.csproj", "{7135F9FD-96A8-4D57-AF0D-45B1E1005A24}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KITT.Web.ReCaptcha.Sample.v3.BlazorServer", "samples\v3\KITT.Web.ReCaptcha.Sample.v3.BlazorServer\KITT.Web.ReCaptcha.Sample.v3.BlazorServer.csproj", "{DD69147C-0C6D-4EC4-8D45-26CD039817B6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,6 +62,10 @@ Global
 		{7135F9FD-96A8-4D57-AF0D-45B1E1005A24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7135F9FD-96A8-4D57-AF0D-45B1E1005A24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7135F9FD-96A8-4D57-AF0D-45B1E1005A24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD69147C-0C6D-4EC4-8D45-26CD039817B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD69147C-0C6D-4EC4-8D45-26CD039817B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD69147C-0C6D-4EC4-8D45-26CD039817B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD69147C-0C6D-4EC4-8D45-26CD039817B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,6 +79,7 @@ Global
 		{03409057-8768-4B73-B81E-33524D5B5575} = {9F2FE018-66B6-420A-AB1F-F482EA4569B7}
 		{4475A800-676E-4CB5-9044-D4C37DDE61E8} = {9F2FE018-66B6-420A-AB1F-F482EA4569B7}
 		{7135F9FD-96A8-4D57-AF0D-45B1E1005A24} = {03409057-8768-4B73-B81E-33524D5B5575}
+		{DD69147C-0C6D-4EC4-8D45-26CD039817B6} = {4475A800-676E-4CB5-9044-D4C37DDE61E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E11BFBD2-D7CD-4847-9A63-9F878DC4AFD7}

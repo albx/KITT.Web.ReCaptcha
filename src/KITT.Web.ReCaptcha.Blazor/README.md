@@ -62,7 +62,6 @@ After that you have to add the *ReCaptchaScript* component. If you're using Blaz
 If you're using Blazor Server, edit the *_Host.cshtml* page in this way:
 ```razor
   ....
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <script src="_framework/blazor.server.js"></script>
   <component type="typeof(ReCaptchaScript)" render-mode="ServerPrerendered" />
 ```
