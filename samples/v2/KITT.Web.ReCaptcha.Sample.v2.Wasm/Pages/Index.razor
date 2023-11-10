@@ -1,0 +1,115 @@
+﻿@page "/"
+@using KITT.Web.ReCaptcha.Blazor.v2
+
+@inject ReCaptchaHttpClient ReCaptchaClient
+
+@implements IDisposable
+
+<PageTitle>KITT ReCaptcha v2 - Blazor WASM sample</PageTitle>
+
+<h1>KITT ReCaptcha v2 - Blazor WASM sample</h1>
+
+@if (!string.IsNullOrWhiteSpace(message))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert @(isSuccessMessage ? "alert-success" : "alert-danger")" role="alert">
+                <p>@message</p>
+                @if (errorCodes.Any())
+                {
+                    <ul class="list-unstyled">
+                        @foreach (var errorCode in errorCodes)
+                        {
+                            <li>@errorCode</li>
+                        }
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+}
+
+<EditForm EditContext="context" role="form" OnValidSubmit="Submit">
+    <DataAnnotationsValidator />
+
+    <div class="mb-3">
+        <label>Text</label>
+        <InputTextArea @bind-Value="model.Text"
+                       class="form-control"
+                       tabindex="0" />
+    </div>
+
+    <div class="mb-3">
+        <ReCaptcha SiteKey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                   @bind-Value="model.CaptchaResponse"
+                   Theme="Theme.Dark"
+                   Size="Size.Normal"
+                   TabIndex="1" />
+    </div>
+
+    <div class="mb-3">
+        <button type="submit" disabled="@disabled" class="btn btn-primary">Click!</button>
+    </div>
+</EditForm>
+
+@code {
+    private ReCaptchaModel model = new();
+
+    private EditContext? context;
+
+    private bool disabled = true;
+
+    private string? message;
+
+    private bool isSuccessMessage;
+
+    private IEnumerable<string> errorCodes = Enumerable.Empty<string>();
+
+    protected override void OnInitialized()
+    {
+        context = new EditContext(model);
+        context.OnFieldChanged += OnFieldChangedHandler;
+    }
+
+    private void OnFieldChangedHandler(object? sender, FieldChangedEventArgs e)
+    {
+        disabled = !(context!.Validate());
+        StateHasChanged();
+    }
+
+    private async Task Submit()
+    {
+        try
+        {
+            var response = await ReCaptchaClient.VerifyAsync(model);
+            if (response == VerifyResponse.Success)
+            {
+                message = "reCaptcha validated successfully!";
+                isSuccessMessage = true;
+                errorCodes = Enumerable.Empty<string>();
+            }
+            else
+            {
+                message = "Error validating reCaptcha";
+                isSuccessMessage = false;
+                errorCodes = response.ErrorCodes;
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+
+            message = $"[Exception {ex.GetType()}] {ex.Message}";
+            isSuccessMessage = false;
+        }
+        finally
+        {
+            model = new();
+        }
+    }
+
+    void IDisposable.Dispose()
+    {
+        context!.OnFieldChanged -= OnFieldChangedHandler;
+    }
+}
