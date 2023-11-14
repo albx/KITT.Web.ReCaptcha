@@ -10,7 +10,7 @@ on:
 env:
   NET_VERSION: '7.x'
   PROJECT_PATH: 'src/KITT.Web.ReCaptcha.Http'
-  PROJECT_FILE: 'KITT.Web.ReCaptcha.Blazor.Http'
+  PROJECT_FILE: 'KITT.Web.ReCaptcha.Http.csproj'
 
 jobs:
   publish:
