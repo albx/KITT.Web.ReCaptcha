@@ -1,4 +1,5 @@
 using KITT.Web.ReCaptcha.Blazor.v3;
+using KITT.Web.ReCaptcha.Http.v3;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,7 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
-builder.Services.AddReCaptchaV3(options => options.SiteKey = builder.Configuration["ReCaptcha:SiteKey"]!);
+builder.Services
+    .AddReCaptchaV3(options => options.SiteKey = builder.Configuration["ReCaptcha:SiteKey"]!)
+    .AddReCaptchaV3HttpClient(options => options.SecretKey = builder.Configuration["ReCaptcha:SecretKey"]!);
 
 var app = builder.Build();
 

@@ -2,7 +2,8 @@
 @using System.ComponentModel.DataAnnotations
 @using KITT.Web.ReCaptcha.Blazor.v3
 
-@inject ReCaptchaService ReCaptcha
+@inject Blazor.v3.ReCaptchaService ReCaptchaClient
+@inject Http.v3.ReCaptchaService ReCaptchaHttp
 
 <PageTitle>KITT ReCaptcha v3 - Blazor Server sample</PageTitle>
 
@@ -45,11 +46,24 @@
     {
         try
         {
-            var reCaptchaClientResponse = await ReCaptcha.VerifyAsync(action: "submit");
+            var reCaptchaClientResponse = await ReCaptchaClient.VerifyAsync(action: "submit");
             if (reCaptchaClientResponse.Succeeded)
             {
-                message = "reCaptcha validated on client successfully!";
-                isSuccessMessage = true;
+                var serverSideResponse = await ReCaptchaHttp.VerifyAsync(
+                    reCaptchaClientResponse.Response,
+                    action: "submit");
+
+                if (serverSideResponse.Success)
+                {
+                    message = "reCaptcha validated successfully!";
+                    isSuccessMessage = true;
+                }
+                else
+                {
+                    message = string.Join(",", serverSideResponse.ErrorCodes);
+                    isSuccessMessage = false;
+                }
+
             }
             else
             {

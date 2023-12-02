@@ -5,7 +5,7 @@ var host = new HostBuilder()
     .ConfigureFunctionsWorkerDefaults()
     .ConfigureServices((ctx, services) =>
     {
-        services.AddReCaptchaV2(options => options.SecretKey = "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe");
+        services.AddReCaptchaV2HttpClient(options => options.SecretKey = "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe");
     })
     .Build();
 

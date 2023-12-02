@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <Title>KITT.Web.ReCaptcha.Http</Title>
-    <Version>0.1.0</Version>
+    <Version>0.2.0</Version>
     <Authors>Alberto Mori</Authors>
     <Description>Contains the service which calls Google reCaptcha verification endpoint for server-side validation</Description>
     <PackageProjectUrl>https://github.com/albx/KITT.Web.ReCaptcha</PackageProjectUrl>
