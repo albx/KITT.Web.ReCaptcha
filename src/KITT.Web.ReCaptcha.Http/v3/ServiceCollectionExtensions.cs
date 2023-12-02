@@ -1,7 +1,7 @@
 ﻿using KITT.Web.ReCaptcha.Http.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace KITT.Web.ReCaptcha.Http.v2;
+namespace KITT.Web.ReCaptcha.Http.v3;
 
 /// <summary>
 /// Defines the extensions methods to register <see cref="ReCaptchaService"/> in the IoC container
@@ -14,7 +14,7 @@ public static class ServiceCollectionExtensions
     /// <param name="services">The <see cref="IServiceCollection"/> instance</param>
     /// <param name="configureOptions">The action used to configure the <see cref="ReCaptchaConfiguration"/> options</param>
     /// <returns>The <see cref="IServiceCollection"/> instance for method chaining</returns>
-    public static IServiceCollection AddReCaptchaV2HttpClient(
+    public static IServiceCollection AddReCaptchaV3HttpClient(
         this IServiceCollection services,
         Action<ReCaptchaConfiguration> configureOptions)
     {

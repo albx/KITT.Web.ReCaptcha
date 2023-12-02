@@ -8,7 +8,7 @@ namespace KITT.Web.ReCaptcha.Http.Test.v3;
 
 public class ReCaptchaServiceTest
 {
-    private static readonly Uri _googleRecaptchaBaseUri = new Uri("https://www.google.com/recaptcha/");
+    private static readonly Uri _googleRecaptchaBaseUri = new("https://www.google.com/recaptcha/");
 
     #region Ctor tests
     [Theory]
@@ -17,7 +17,7 @@ public class ReCaptchaServiceTest
     [InlineData(" ")]
     public void Ctor_Should_Throw_Argument_Exception_If_Secret_Key_Is_Missing(string secretKey)
     {
-        using HttpClient httpClient = new HttpClient();
+        using HttpClient httpClient = new();
         IOptions<ReCaptchaConfiguration> reCaptchaConfigurationOptions = Options.Create(new ReCaptchaConfiguration { SecretKey = secretKey });
 
         var ex = Assert.Throws<ArgumentException>(() => new ReCaptchaService(httpClient, reCaptchaConfigurationOptions));

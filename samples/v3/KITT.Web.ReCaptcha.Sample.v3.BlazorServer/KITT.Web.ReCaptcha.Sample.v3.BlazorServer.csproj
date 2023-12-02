@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\KITT.Web.ReCaptcha.Blazor\KITT.Web.ReCaptcha.Blazor.csproj" />
+    <ProjectReference Include="..\..\..\src\KITT.Web.ReCaptcha.Http\KITT.Web.ReCaptcha.Http.csproj" />
   </ItemGroup>
 
 </Project>

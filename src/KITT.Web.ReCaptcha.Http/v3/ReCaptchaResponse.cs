@@ -2,6 +2,9 @@
 
 namespace KITT.Web.ReCaptcha.Http.v3;
 
+/// <summary>
+/// Defines the response of the call to the reCaptcha verification endpoint
+/// </summary>
 public record ReCaptchaResponse
 {
     /// <summary>
@@ -10,9 +13,15 @@ public record ReCaptchaResponse
     [JsonPropertyName("success")]
     public bool Success { get; init; }
 
+    /// <summary>
+    /// Gets the score for the request
+    /// </summary>
     [JsonPropertyName("score")]
     public double Score { get; init; }
 
+    /// <summary>
+    /// Gets the action name for the request
+    /// </summary>
     [JsonPropertyName("action")]
     public string Action { get; init; } = string.Empty;
 
