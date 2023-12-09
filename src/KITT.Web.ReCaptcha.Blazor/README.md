@@ -1,7 +1,7 @@
 # KITT.Web.ReCaptcha.Blazor
 
 This project add Google reCaptcha to your Blazor apps.<br/>
-This project targets **.NET 7** as supported Framework version.
+This project targets **.NET 8** as supported Framework version.
 
 ## Installation
 
