@@ -1,7 +1,7 @@
 # KITT.Web.ReCaptcha.Http
 
 This project add Google reCaptcha to your ASP.NET Core apps giving the service to validate your reCaptcha client response.<br/>
-This project targets **.NET 6** and **.NET 7** as supported Framework versions.
+This project targets **.NET 6** and **.NET 8** as supported Framework versions.
 
 ## Installation
 
