@@ -1,4 +1,5 @@
 ﻿using KITT.Web.ReCaptcha.Http.Configuration;
+using KITT.Web.ReCaptcha.Http.Internals;
 using Microsoft.Extensions.Options;
 using System.Net.Http.Json;
 
@@ -7,12 +8,8 @@ namespace KITT.Web.ReCaptcha.Http.v3;
 /// <summary>
 /// This service verifies the captcha response from the client calling the Google API
 /// </summary>
-public class ReCaptchaService
+public class ReCaptchaService : ReCaptchaBaseClient
 {
-    private readonly HttpClient _httpClient;
-
-    private readonly ReCaptchaConfiguration _configuration;
-
     /// <summary>
     /// Constructs the service instance
     /// </summary>
@@ -20,11 +17,8 @@ public class ReCaptchaService
     /// <param name="reCaptchaConfigurationOptions">The <see cref="IOptions{ReCaptchaConfiguration}"/> instance which contains the server side secret key</param>
     /// <exception cref="ArgumentNullException">Thrown when <see cref="HttpClient"/> or <see cref="IOptions{ReCaptchaConfiguration}"/> instance is null</exception>
     public ReCaptchaService(HttpClient httpClient, IOptions<ReCaptchaConfiguration> reCaptchaConfigurationOptions)
+        : base(httpClient, reCaptchaConfigurationOptions?.Value)
     {
-        _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
-        _configuration = reCaptchaConfigurationOptions?.Value ?? throw new ArgumentNullException(nameof(reCaptchaConfigurationOptions));
-
-        ThrowIfConfigurationIsNotValid(_configuration);
     }
 
     /// <summary>
@@ -49,15 +43,7 @@ public class ReCaptchaService
             throw new ArgumentException("value cannot be empty", nameof(action));
         }
 
-        var content = new FormUrlEncodedContent(new Dictionary<string, string?>
-        {
-            ["secret"] = _configuration.SecretKey,
-            ["response"] = response,
-            ["remoteip"] = remoteIp
-        });
-
-        var reCaptchaResponse = await _httpClient.PostAsync("api/siteverify", content, cancellationToken);
-        reCaptchaResponse.EnsureSuccessStatusCode();
+        var reCaptchaResponse = await SendReCaptchaRequestAsync(response, remoteIp, cancellationToken).ConfigureAwait(false);
 
         var responseResult = await reCaptchaResponse.Content.ReadFromJsonAsync<ReCaptchaResponse>(
             cancellationToken: cancellationToken);
@@ -69,14 +55,4 @@ public class ReCaptchaService
 
         return responseResult!;
     }
-
-    #region Private methods
-    private static void ThrowIfConfigurationIsNotValid(ReCaptchaConfiguration configuration)
-    {
-        if (string.IsNullOrWhiteSpace(configuration.SecretKey))
-        {
-            throw new ArgumentException("value cannot be empty", nameof(configuration.SecretKey));
-        }
-    }
-    #endregion
 }
