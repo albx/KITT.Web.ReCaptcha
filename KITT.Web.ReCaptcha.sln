@@ -28,9 +28,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "v3", "v3", "{4475A800-676E-
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KITT.Web.ReCaptcha.Sample.Shared", "samples\KITT.Web.ReCaptcha.Sample.Shared\KITT.Web.ReCaptcha.Sample.Shared.csproj", "{28FE910D-7762-4DCE-872B-705FD8A906AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KITT.Web.ReCaptcha.Samples.v2.Blazor", "samples\v2\KITT.Web.ReCaptcha.Samples.v2.Blazor\KITT.Web.ReCaptcha.Samples.v2.Blazor\KITT.Web.ReCaptcha.Samples.v2.Blazor.csproj", "{FD5AF956-9CF8-488B-BF5F-5B1A1EA27636}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KITT.Web.ReCaptcha.Samples.v2.Blazor", "samples\v2\KITT.Web.ReCaptcha.Samples.v2.Blazor\KITT.Web.ReCaptcha.Samples.v2.Blazor\KITT.Web.ReCaptcha.Samples.v2.Blazor.csproj", "{FD5AF956-9CF8-488B-BF5F-5B1A1EA27636}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KITT.Web.ReCaptcha.Samples.v2.Blazor.Client", "samples\v2\KITT.Web.ReCaptcha.Samples.v2.Blazor\KITT.Web.ReCaptcha.Samples.v2.Blazor.Client\KITT.Web.ReCaptcha.Samples.v2.Blazor.Client.csproj", "{1F5B3AEF-C093-4F48-A7E2-AB5B61540F13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KITT.Web.ReCaptcha.Samples.v2.Blazor.Client", "samples\v2\KITT.Web.ReCaptcha.Samples.v2.Blazor\KITT.Web.ReCaptcha.Samples.v2.Blazor.Client\KITT.Web.ReCaptcha.Samples.v2.Blazor.Client.csproj", "{1F5B3AEF-C093-4F48-A7E2-AB5B61540F13}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KITT.Web.ReCaptcha.Samples.v3.Blazor", "samples\v3\KITT.Web.ReCaptcha.Samples.v3.Blazor\KITT.Web.ReCaptcha.Samples.v3.Blazor\KITT.Web.ReCaptcha.Samples.v3.Blazor.csproj", "{97B32D11-59DD-4B24-A4C6-C5AB1B385D35}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KITT.Web.ReCaptcha.Samples.v3.Blazor.Client", "samples\v3\KITT.Web.ReCaptcha.Samples.v3.Blazor\KITT.Web.ReCaptcha.Samples.v3.Blazor.Client\KITT.Web.ReCaptcha.Samples.v3.Blazor.Client.csproj", "{B401AEE5-DFA2-41FD-9CC3-CF3B353CFC9B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -66,6 +70,14 @@ Global
 		{1F5B3AEF-C093-4F48-A7E2-AB5B61540F13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F5B3AEF-C093-4F48-A7E2-AB5B61540F13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F5B3AEF-C093-4F48-A7E2-AB5B61540F13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97B32D11-59DD-4B24-A4C6-C5AB1B385D35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97B32D11-59DD-4B24-A4C6-C5AB1B385D35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97B32D11-59DD-4B24-A4C6-C5AB1B385D35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97B32D11-59DD-4B24-A4C6-C5AB1B385D35}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B401AEE5-DFA2-41FD-9CC3-CF3B353CFC9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B401AEE5-DFA2-41FD-9CC3-CF3B353CFC9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B401AEE5-DFA2-41FD-9CC3-CF3B353CFC9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B401AEE5-DFA2-41FD-9CC3-CF3B353CFC9B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,6 +92,8 @@ Global
 		{28FE910D-7762-4DCE-872B-705FD8A906AB} = {9F2FE018-66B6-420A-AB1F-F482EA4569B7}
 		{FD5AF956-9CF8-488B-BF5F-5B1A1EA27636} = {03409057-8768-4B73-B81E-33524D5B5575}
 		{1F5B3AEF-C093-4F48-A7E2-AB5B61540F13} = {03409057-8768-4B73-B81E-33524D5B5575}
+		{97B32D11-59DD-4B24-A4C6-C5AB1B385D35} = {4475A800-676E-4CB5-9044-D4C37DDE61E8}
+		{B401AEE5-DFA2-41FD-9CC3-CF3B353CFC9B} = {4475A800-676E-4CB5-9044-D4C37DDE61E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E11BFBD2-D7CD-4847-9A63-9F878DC4AFD7}

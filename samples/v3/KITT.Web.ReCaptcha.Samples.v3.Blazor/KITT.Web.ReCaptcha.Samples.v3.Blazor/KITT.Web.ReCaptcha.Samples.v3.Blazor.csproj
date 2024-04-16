@@ -4,11 +4,12 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>35c49c18-040c-4752-b489-40218717aa41</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\src\KITT.Web.ReCaptcha.Http\KITT.Web.ReCaptcha.Http.csproj" />
-    <ProjectReference Include="..\KITT.Web.ReCaptcha.Samples.v2.Blazor.Client\KITT.Web.ReCaptcha.Samples.v2.Blazor.Client.csproj" />
+    <ProjectReference Include="..\KITT.Web.ReCaptcha.Samples.v3.Blazor.Client\KITT.Web.ReCaptcha.Samples.v3.Blazor.Client.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.4" />
   </ItemGroup>
 

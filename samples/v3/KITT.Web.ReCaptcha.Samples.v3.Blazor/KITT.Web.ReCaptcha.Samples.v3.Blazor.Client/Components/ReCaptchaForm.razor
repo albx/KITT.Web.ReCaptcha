@@ -1,6 +1,7 @@
 ﻿@rendermode InteractiveAuto
-@implements IDisposable
+@implements IAsyncDisposable
 
+@inject ReCaptchaService ReCaptcha
 @inject IReCaptchaFormClient Client
 
 @if (!string.IsNullOrWhiteSpace(message))
@@ -34,14 +35,6 @@
     </div>
 
     <div class="mb-3">
-        <ReCaptcha SiteKey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-                   @bind-Value="model.CaptchaResponse"
-                   Size="Size.Normal"
-                   Theme="Theme.Light"
-                   TabIndex="1" />
-    </div>
-
-    <div class="mb-3">
         <button type="submit" disabled="@disabled" class="btn btn-primary">Click!</button>
     </div>
 </EditForm>
@@ -49,7 +42,7 @@
 @code {
     private EditContext? context;
 
-    private ReCaptchaModel model = new(captchaFromUi: true);
+    private ReCaptchaModel model = new();
 
     private bool disabled = true;
 
@@ -71,15 +64,20 @@
         StateHasChanged();
     }
 
-    void IDisposable.Dispose()
-    {
-        context!.OnFieldChanged -= OnFieldChangedHandler;
-    }
-
     private async Task SubmitAsync()
     {
-        var result = await Client.SendAsync(model);
+        var verificationResult = await ReCaptcha.VerifyAsync(action: "submit");
+        if (!verificationResult.Succeeded)
+        {
+            isSuccessMessage = false;
+            message = verificationResult.Error;
 
+            return;
+        }
+
+        model.CaptchaResponse = verificationResult.Response;
+
+        var result = await Client.SendAsync(model);
         if (result == ReCaptchaFormResult.Succeeded)
         {
             isSuccessMessage = true;
@@ -91,5 +89,11 @@
             message = result.ErrorMessage;
             errorCodes = result.ErrorCodes;
         }
+    }
+
+    async ValueTask IAsyncDisposable.DisposeAsync()
+    {
+        context!.OnFieldChanged -= OnFieldChangedHandler;
+        await (ReCaptcha as IAsyncDisposable).DisposeAsync();
     }
 }
