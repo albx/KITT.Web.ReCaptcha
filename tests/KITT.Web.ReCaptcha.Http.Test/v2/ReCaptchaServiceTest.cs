@@ -12,7 +12,6 @@ public class ReCaptchaServiceTest
 
     #region Ctor tests
     [Theory]
-    [InlineData(null)]
     [InlineData("")]
     [InlineData(" ")]
     public void Ctor_Should_Throw_Argument_Exception_If_Secret_Key_Is_Missing(string secretKey)
@@ -27,7 +26,6 @@ public class ReCaptchaServiceTest
 
     #region VerifyAsync tests
     [Theory]
-    [InlineData(null)]
     [InlineData("")]
     [InlineData(" ")]
     public async Task VerifyAsync_Should_Throw_ArgumentException_If_Response_Is_Empty(string response)

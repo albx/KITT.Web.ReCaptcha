@@ -1,0 +1,99 @@
+﻿@rendermode InteractiveAuto
+@implements IAsyncDisposable
+
+@inject ReCaptchaService ReCaptcha
+@inject IReCaptchaFormClient Client
+
+@if (!string.IsNullOrWhiteSpace(message))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert @(isSuccessMessage ? "alert-success" : "alert-danger")" role="alert">
+                <p>@message</p>
+                @if (errorCodes.Any())
+                {
+                    <ul class="list-unstyled">
+                        @foreach (var errorCode in errorCodes)
+                        {
+                            <li>@errorCode</li>
+                        }
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+}
+
+<EditForm EditContext="context" role="form" OnValidSubmit="SubmitAsync">
+    <DataAnnotationsValidator />
+
+    <div class="mb-3">
+        <label>Text</label>
+        <InputTextArea @bind-Value="model.Text"
+                       class="form-control"
+                       tabindex="0" />
+    </div>
+
+    <div class="mb-3">
+        <button type="submit" disabled="@disabled" class="btn btn-primary">Click!</button>
+    </div>
+</EditForm>
+
+@code {
+    private EditContext? context;
+
+    private ReCaptchaModel model = new();
+
+    private bool disabled = true;
+
+    private string? message;
+
+    private bool isSuccessMessage;
+
+    private string[] errorCodes = [];
+
+    protected override void OnInitialized()
+    {
+        context = new EditContext(model);
+        context.OnFieldChanged += OnFieldChangedHandler;
+    }
+
+    private void OnFieldChangedHandler(object? sender, FieldChangedEventArgs e)
+    {
+        disabled = !(context!.Validate());
+        StateHasChanged();
+    }
+
+    private async Task SubmitAsync()
+    {
+        var verificationResult = await ReCaptcha.VerifyAsync(action: "submit");
+        if (!verificationResult.Succeeded)
+        {
+            isSuccessMessage = false;
+            message = verificationResult.Error;
+
+            return;
+        }
+
+        model.CaptchaResponse = verificationResult.Response;
+
+        var result = await Client.SendAsync(model);
+        if (result == ReCaptchaFormResult.Succeeded)
+        {
+            isSuccessMessage = true;
+            message = "reCaptcha validated successfully!";
+        }
+        else
+        {
+            isSuccessMessage = false;
+            message = result.ErrorMessage;
+            errorCodes = result.ErrorCodes;
+        }
+    }
+
+    async ValueTask IAsyncDisposable.DisposeAsync()
+    {
+        context!.OnFieldChanged -= OnFieldChangedHandler;
+        await (ReCaptcha as IAsyncDisposable).DisposeAsync();
+    }
+}

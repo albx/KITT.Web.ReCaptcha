@@ -1,0 +1,61 @@
+﻿@page "/"
+
+@inject ReCaptchaService ReCaptcha
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+@if (!string.IsNullOrWhiteSpace(message))
+{
+    <div class="row">
+        <div class="col-md-12">@message</div>
+    </div>
+    <hr />
+}
+
+<EditForm Model="model" OnValidSubmit="SubmitAsync">
+    <DataAnnotationsValidator />
+
+    <div class="mb-2">
+        <label>Text</label>
+        <InputText class="form-control" @bind-Value="model.Text" />
+    </div>
+    <div class="mb-2">
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </div>
+</EditForm>
+
+@code {
+    private ViewModel model = new();
+
+    private string message = string.Empty;
+
+    private async Task SubmitAsync()
+    {
+        try
+        {
+            var result = await ReCaptcha.VerifyAsync(action: "submit");
+            if (result.Succeeded)
+            {
+                message = "reCaptcha validated!";
+            }
+            else
+            {
+                message = result.Error;
+            }
+        }
+        catch (Exception ex)
+        {
+            message = ex.Message;
+        }
+
+    }
+
+    class ViewModel
+    {
+        public string Text { get; set; } = string.Empty;
+    }
+}
