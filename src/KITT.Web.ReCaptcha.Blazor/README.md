@@ -52,13 +52,27 @@ The component needs to be used inside an ```EditForm```. It exposes the followin
 
 You can register reCaptcha using the ```AddReCaptchaV3``` extension method:
 ```csharp
+  using KITT.Web.ReCaptcha.Blazor.v3;
+  //...
   builder.Services.AddReCaptchaV3(options => options.SiteKey = "<YOUR CLIENT SITE KEY VALUE>");
 ```
-After that you have to add the *ReCaptchaScript* component. If you're using Blazor WebAssembly, simply register it to the RootComponents calling the extension method:
+After that you have to add the *ReCaptchaScript* component. 
+
+#### Blazor Web App
+With the new Blazor Web App you can add the *ReCaptchaScript* component to your App.razor:
+```razor
+  ....
+  <ReCaptchaScript />
+  <script src="_framework/blazor.web.js"></script>
+```
+
+#### Blazor WebAssembly
+If you're using Blazor WebAssembly, simply register it to the RootComponents calling the extension method:
 ```csharp
   builder.RootComponents.RegisterReCaptchaScript();
 ```
 
+#### Blazor Server
 If you're using Blazor Server, edit the *_Host.cshtml* page in this way:
 ```razor
   ....
@@ -79,5 +93,6 @@ After that you can inject the ReCaptchaService to your component and call the Ve
 
 ## Samples
 
-In the [samples](https://github.com/albx/KITT.Web.ReCaptcha/tree/main/samples) folder you can find both Blazor WebAssembly and Blazor Server samples.
+In the [samples](https://github.com/albx/KITT.Web.ReCaptcha/tree/main/samples) folder you can find samples both for reCaptcha v2 and reCaptcha v3 using the new Blazor Web App template.
+
 The site key used in this samples is only for testing purpose.
