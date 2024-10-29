@@ -9,7 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\src\KITT.Web.ReCaptcha.Http\KITT.Web.ReCaptcha.Http.csproj" />
     <ProjectReference Include="..\KITT.Web.ReCaptcha.Samples.v2.Blazor.Client\KITT.Web.ReCaptcha.Samples.v2.Blazor.Client.csproj" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.10" />
   </ItemGroup>
 
 </Project>
