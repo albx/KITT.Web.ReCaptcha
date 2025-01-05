@@ -2,36 +2,35 @@ name: Build and run Test
 
 on:
   pull_request:
-    branches: [ "main" ]
-    paths: 
-    - '**.cs'
-    - '**.razor'
-    - '**.csproj'
+    branches: ["main"]
+    paths:
+      - "**.cs"
+      - "**.razor"
+      - "**.csproj"
   workflow_dispatch:
 
 env:
-  NET_VERSION: '8.x'
+  NET_VERSION: "9.x"
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-      with: 
-        fetch-depth: 0
-        
-    - name: Setup .NET Core SDK ${{ env.NET_VERSION }}
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: ${{ env.NET_VERSION }}
-        
-    - name: Restore dependencies
-      run: dotnet restore
-      
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
-      
-    - name: Test
-      run: dotnet test --configuration Release --no-build --verbosity normal
-                    
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET Core SDK ${{ env.NET_VERSION }}
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ env.NET_VERSION }}
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test --configuration Release --no-build --verbosity normal

@@ -2,15 +2,15 @@ name: Publish Http project to NuGet
 
 on:
   push:
-    branches: [ 'main' ]
-    paths: 
-    - 'src/KITT.Web.ReCaptcha.Http/**'
+    branches: ["main"]
+    paths:
+      - "src/KITT.Web.ReCaptcha.Http/**"
   workflow_dispatch:
 
 env:
-  NET_VERSION: '8.x'
-  PROJECT_PATH: 'src/KITT.Web.ReCaptcha.Http'
-  PROJECT_FILE: 'KITT.Web.ReCaptcha.Http.csproj'
+  NET_VERSION: "9.x"
+  PROJECT_PATH: "src/KITT.Web.ReCaptcha.Http"
+  PROJECT_FILE: "KITT.Web.ReCaptcha.Http.csproj"
 
 jobs:
   publish:
@@ -18,17 +18,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-      with: 
-        fetch-depth: 0
-    
-    - name: Setup .NET Core SDK ${{ env.NET_VERSION }}
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: ${{ env.NET_VERSION }}
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-    - name: Create nupkg file
-      run: dotnet pack -c Release -o . '${{ env.PROJECT_PATH }}/${{ env.PROJECT_FILE }}'
+      - name: Setup .NET Core SDK ${{ env.NET_VERSION }}
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ env.NET_VERSION }}
 
-    - name: Publish on NuGet
-      run: dotnet nuget push *.nupkg -k ${{ secrets.NUGET_APIKEY }} -s https://api.nuget.org/v3/index.json
+      - name: Create nupkg file
+        run: dotnet pack -c Release -o . '${{ env.PROJECT_PATH }}/${{ env.PROJECT_FILE }}'
+
+      - name: Publish on NuGet
+        run: dotnet nuget push *.nupkg -k ${{ secrets.NUGET_APIKEY }} -s https://api.nuget.org/v3/index.json

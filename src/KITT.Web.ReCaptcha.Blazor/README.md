@@ -1,26 +1,27 @@
 # KITT.Web.ReCaptcha.Blazor
 
 This project add Google reCaptcha to your Blazor apps.<br/>
-This project targets **.NET 8** as supported Framework version.
+This project targets **.NET 9** as supported Framework version.
 
 ## Installation
 
 This project is available on [NuGet](https://www.nuget.org/packages/KITT.Web.ReCaptcha.Blazor).
 
-It can be installed using the ```dotnet add package``` command or the NuGet wizard on your favourite IDE.
+It can be installed using the `dotnet add package` command or the NuGet wizard on your favourite IDE.
 
 ```bash
   dotnet add package KITT.Web.ReCaptcha.Blazor
 ```
 
 ## reCaptcha v2
+
 ### Usage
 
 The project gives you a Razor component which add the reCaptcha v2 widget.
 
-Add the namespace ```KITT.Web.ReCaptcha.Blazor.v2``` to your Razor Components or in the ```_Imports.razor``` file.
+Add the namespace `KITT.Web.ReCaptcha.Blazor.v2` to your Razor Components or in the `_Imports.razor` file.
 
-After that you can use the ```<ReCaptcha />``` component in your ```EditForm``` like in this sample:
+After that you can use the `<ReCaptcha />` component in your `EditForm` like in this sample:
 
 ```csharp
   <ReCaptcha SiteKey="<your reCaptcha v2 client key>"
@@ -36,30 +37,35 @@ After that you can use the ```<ReCaptcha />``` component in your ```EditForm``` 
 
 ### Parameters
 
-The component needs to be used inside an ```EditForm```. It exposes the following properties:
+The component needs to be used inside an `EditForm`. It exposes the following properties:
 
-|Property|Description|
-|---|---|
-|**SiteKey** (Required)|*string*: the value of the v2 client site key|
-|**@bind-Value**|*string*: the property to bind|
-|**Theme**|*Theme* enum: the theme to use (default: *Theme.Light*)|
-|**Size**|*Size* enum: the size of the widget (default: *Size.Normal*)|
-|**TabIndex**|*int*: the tabIndex value (default: *0*)|
-|**Id**|*string*: the id of the HTML element used to render the reCaptcha widget (*default*: "recaptcha")|
+| Property               | Description                                                                                       |
+| ---------------------- | ------------------------------------------------------------------------------------------------- |
+| **SiteKey** (Required) | _string_: the value of the v2 client site key                                                     |
+| **@bind-Value**        | _string_: the property to bind                                                                    |
+| **Theme**              | _Theme_ enum: the theme to use (default: _Theme.Light_)                                           |
+| **Size**               | _Size_ enum: the size of the widget (default: _Size.Normal_)                                      |
+| **TabIndex**           | _int_: the tabIndex value (default: _0_)                                                          |
+| **Id**                 | _string_: the id of the HTML element used to render the reCaptcha widget (_default_: "recaptcha") |
 
 ## reCaptcha v3
+
 ### Usage
 
-You can register reCaptcha using the ```AddReCaptchaV3``` extension method:
+You can register reCaptcha using the `AddReCaptchaV3` extension method:
+
 ```csharp
   using KITT.Web.ReCaptcha.Blazor.v3;
   //...
   builder.Services.AddReCaptchaV3(options => options.SiteKey = "<YOUR CLIENT SITE KEY VALUE>");
 ```
-After that you have to add the *ReCaptchaScript* component. 
+
+After that you have to add the _ReCaptchaScript_ component.
 
 #### Blazor Web App
-With the new Blazor Web App you can add the *ReCaptchaScript* component to your App.razor:
+
+With the new Blazor Web App you can add the _ReCaptchaScript_ component to your App.razor:
+
 ```razor
   ....
   <ReCaptchaScript />
@@ -67,19 +73,25 @@ With the new Blazor Web App you can add the *ReCaptchaScript* component to your 
 ```
 
 #### Blazor WebAssembly
+
 If you're using Blazor WebAssembly, simply register it to the RootComponents calling the extension method:
+
 ```csharp
   builder.RootComponents.RegisterReCaptchaScript();
 ```
 
 #### Blazor Server
-If you're using Blazor Server, edit the *_Host.cshtml* page in this way:
+
+If you're using Blazor Server, edit the _\_Host.cshtml_ page in this way:
+
 ```razor
   ....
   <script src="_framework/blazor.server.js"></script>
   <component type="typeof(ReCaptchaScript)" render-mode="ServerPrerendered" />
 ```
+
 After that you can inject the ReCaptchaService to your component and call the VerifyAsync method:
+
 ```razor
   @inject ReCaptchaService ReCaptcha
   ...
