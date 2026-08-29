@@ -41,5 +41,5 @@ public record ReCaptchaResponse
     /// Gets the optional list of error codes (see https://developers.google.com/recaptcha/docs/verify#error_code_reference)
     /// </summary>
     [JsonPropertyName("error-codes")]
-    public IEnumerable<string> ErrorCodes { get; init; } = Enumerable.Empty<string>();
+    public IEnumerable<string> ErrorCodes { get; init; } = [];
 }

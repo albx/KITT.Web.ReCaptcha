@@ -5,7 +5,7 @@ using Microsoft.JSInterop;
 
 namespace KITT.Web.ReCaptcha.Blazor.Test.v3;
 
-public class ReCaptchaServiceTest : TestContext
+public class ReCaptchaServiceTest : BunitContext
 {
     [Theory]
     [InlineData("")]
