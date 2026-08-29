@@ -7,17 +7,11 @@ namespace KITT.Web.ReCaptcha.Blazor.v2;
 /// <summary>
 /// The v2 ReCaptcha component
 /// </summary>
-public partial class ReCaptcha : IAsyncDisposable
+public partial class ReCaptcha(IJSRuntime jSRuntime) : IAsyncDisposable
 {
     private IJSObjectReference? module;
 
     private const string ElementId = "recaptcha";
-
-    /// <summary>
-    /// Gets or sets the injected <see cref="IJSRuntime"/> instance
-    /// </summary>
-    [Inject]
-    public IJSRuntime Js { get; set; } = default!;
 
     /// <summary>
     /// Gets or sets the Google reCaptcha v2 client site key
@@ -76,11 +70,11 @@ public partial class ReCaptcha : IAsyncDisposable
     {
         if (firstRender)
         {
-            module = await Js.InvokeAsync<IJSObjectReference>(
+            module = await jSRuntime.InvokeAsync<IJSObjectReference>(
                 "import",
                 "./_content/KITT.Web.ReCaptcha.Blazor/v2/ReCaptcha.razor.js");
 
-            await module.InvokeAsync<int>(
+            await module.InvokeVoidAsync(
                 "initialize",
                 DotNetObjectReference.Create(this),
                 Id,

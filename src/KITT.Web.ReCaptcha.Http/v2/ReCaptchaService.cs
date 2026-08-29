@@ -8,18 +8,14 @@ namespace KITT.Web.ReCaptcha.Http.v2;
 /// <summary>
 /// This service verifies the captcha response from the client calling the Google API
 /// </summary>
-public class ReCaptchaService : ReCaptchaBaseClient
+/// <remarks>
+/// Constructs the service instance
+/// </remarks>
+/// <param name="httpClient">The <see cref="HttpClient"/> instance configured to call the Google API</param>
+/// <param name="reCaptchaConfigurationOptions">The <see cref="IOptions{ReCaptchaConfiguration}"/> instance which contains the server side secret key</param>
+/// <exception cref="ArgumentNullException">Thrown when <see cref="HttpClient"/> or <see cref="IOptions{ReCaptchaConfiguration}"/> instance is null</exception>
+public class ReCaptchaService(HttpClient httpClient, IOptions<ReCaptchaConfiguration> reCaptchaConfigurationOptions) : ReCaptchaBaseClient(httpClient, reCaptchaConfigurationOptions?.Value)
 {
-    /// <summary>
-    /// Constructs the service instance
-    /// </summary>
-    /// <param name="httpClient">The <see cref="HttpClient"/> instance configured to call the Google API</param>
-    /// <param name="reCaptchaConfigurationOptions">The <see cref="IOptions{ReCaptchaConfiguration}"/> instance which contains the server side secret key</param>
-    /// <exception cref="ArgumentNullException">Thrown when <see cref="HttpClient"/> or <see cref="IOptions{ReCaptchaConfiguration}"/> instance is null</exception>
-    public ReCaptchaService(HttpClient httpClient, IOptions<ReCaptchaConfiguration> reCaptchaConfigurationOptions)
-        : base(httpClient, reCaptchaConfigurationOptions?.Value)
-    {
-    }
 
     /// <summary>
     /// Verifies the response of the reCaptcha client side integration

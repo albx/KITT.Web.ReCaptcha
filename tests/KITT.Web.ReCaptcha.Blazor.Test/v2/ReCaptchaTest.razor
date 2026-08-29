@@ -6,9 +6,9 @@
         var siteKey = "testsitekey";
         var captchaResponse = "";
 
-        using var ctx = new TestContext();
+        using var ctx = new BunitContext();
         ctx.JSInterop.SetupModule("./_content/KITT.Web.ReCaptcha.Blazor/v2/ReCaptcha.razor.js")
-            .Setup<int>("initialize", _ => true);
+            .SetupVoid("initialize", _ => true);
 
         var component = ctx.Render(@<ReCaptcha SiteKey="@siteKey" @bind-Value="captchaResponse" />);
 
@@ -21,9 +21,9 @@
         var siteKey = "testsitekey";
         var captchaResponse = "";
 
-        using var ctx = new TestContext();
+        using var ctx = new BunitContext();
         ctx.JSInterop.SetupModule("./_content/KITT.Web.ReCaptcha.Blazor/v2/ReCaptcha.razor.js")
-            .Setup<int>("initialize", _ => true);
+            .SetupVoid("initialize", _ => true);
 
         var component = ctx.Render(
             @<ReCaptcha SiteKey="@siteKey" @bind-Value="captchaResponse" Id="testId" />);
@@ -37,9 +37,9 @@
         var siteKey = "testsitekey";
         var captchaResponse = "";
 
-        using var ctx = new TestContext();
+        using var ctx = new BunitContext();
         var module = ctx.JSInterop.SetupModule("./_content/KITT.Web.ReCaptcha.Blazor/v2/ReCaptcha.razor.js");
-        module.Setup<int>(
+        module.SetupVoid(
             "initialize", 
             i => i.Arguments[1]!.ToString() == "recaptcha" &&
                 i.Arguments[2]!.ToString() == siteKey &&
@@ -61,9 +61,9 @@
         var siteKey = "testsitekey";
         var captchaResponse = "";
 
-        using var ctx = new TestContext();
+        using var ctx = new BunitContext();
         var module = ctx.JSInterop.SetupModule("./_content/KITT.Web.ReCaptcha.Blazor/v2/ReCaptcha.razor.js");
-        module.Setup<int>(
+        module.SetupVoid(
             "initialize", 
             i => i.Arguments[1]!.ToString() == "recaptcha" &&
                 i.Arguments[2]!.ToString() == siteKey &&
@@ -85,9 +85,9 @@
         var siteKey = "testsitekey";
         var captchaResponse = "";
 
-        using var ctx = new TestContext();
+        using var ctx = new BunitContext();
         var module = ctx.JSInterop.SetupModule("./_content/KITT.Web.ReCaptcha.Blazor/v2/ReCaptcha.razor.js");
-        module.Setup<int>(
+        module.SetupVoid(
             "initialize", 
             i => i.Arguments[1]!.ToString() == "recaptcha" &&
                 i.Arguments[2]!.ToString() == siteKey &&
@@ -107,9 +107,9 @@
         var siteKey = "testsitekey";
         var captchaResponse = "";
 
-        using var ctx = new TestContext();
+        using var ctx = new BunitContext();
         var module = ctx.JSInterop.SetupModule("./_content/KITT.Web.ReCaptcha.Blazor/v2/ReCaptcha.razor.js");
-        module.Setup<int>(
+        module.SetupVoid(
             "initialize",
             i => i.Arguments[1]!.ToString() == "recaptcha" &&
                 i.Arguments[2]!.ToString() == siteKey &&

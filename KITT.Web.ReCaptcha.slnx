@@ -1,0 +1,25 @@
+<Solution>
+  <Folder Name="/samples/">
+    <Project Path="samples/KITT.Web.ReCaptcha.Sample.Shared/KITT.Web.ReCaptcha.Sample.Shared.csproj" />
+  </Folder>
+  <Folder Name="/samples/v2/">
+    <Project Path="samples/v2/KITT.Web.ReCaptcha.Samples.v2.Blazor/KITT.Web.ReCaptcha.Samples.v2.Blazor.Client/KITT.Web.ReCaptcha.Samples.v2.Blazor.Client.csproj" />
+    <Project Path="samples/v2/KITT.Web.ReCaptcha.Samples.v2.Blazor/KITT.Web.ReCaptcha.Samples.v2.Blazor/KITT.Web.ReCaptcha.Samples.v2.Blazor.csproj" />
+  </Folder>
+  <Folder Name="/samples/v3/">
+    <Project Path="samples/v3/KITT.Web.ReCaptcha.Samples.v3.Blazor/KITT.Web.ReCaptcha.Samples.v3.Blazor.Client/KITT.Web.ReCaptcha.Samples.v3.Blazor.Client.csproj" />
+    <Project Path="samples/v3/KITT.Web.ReCaptcha.Samples.v3.Blazor/KITT.Web.ReCaptcha.Samples.v3.Blazor/KITT.Web.ReCaptcha.Samples.v3.Blazor.csproj" />
+    <Project Path="samples/v3/KITT.Web.ReCaptcha.Samples.v3.BlazorServerInteractivity/KITT.Web.ReCaptcha.Samples.v3.BlazorServerInteractivity.csproj" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/KITT.Web.ReCaptcha.Blazor/KITT.Web.ReCaptcha.Blazor.csproj" />
+    <Project Path="src/KITT.Web.ReCaptcha.Http/KITT.Web.ReCaptcha.Http.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/KITT.Web.ReCaptcha.Blazor.Test/KITT.Web.ReCaptcha.Blazor.Test.csproj" />
+    <Project Path="tests/KITT.Web.ReCaptcha.Http.Test/KITT.Web.ReCaptcha.Http.Test.csproj" />
+  </Folder>
+</Solution>
